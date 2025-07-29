@@ -1,8 +1,12 @@
-# Next.js SaaS Starter
+# Dat09Bot Monorepo
 
-This is a starter template for building a SaaS application using **Next.js** with support for authentication, Stripe integration for payments, and a dashboard for logged-in users.
+A monorepo containing a Next.js frontend and NestJS backend API for the Dat09Bot SaaS platform.
 
-**Demo: [https://next-saas-start.vercel.app/](https://next-saas-start.vercel.app/)**
+## Structure
+
+- **apps/web**: Next.js frontend application
+- **apps/api**: NestJS backend API server  
+- **packages/shared**: Shared types and schemas
 
 ## Features
 
@@ -11,34 +15,30 @@ This is a starter template for building a SaaS application using **Next.js** wit
 - Dashboard pages with CRUD operations on users/teams
 - Basic RBAC with Owner and Member roles
 - Subscription management with Stripe Customer Portal
-- Email/password authentication with JWTs stored to cookies
+- Email/password authentication with JWTs
+- RESTful API with NestJS and Swagger documentation
 - Global middleware to protect logged-in routes
-- Local middleware to protect Server Actions or validate Zod schemas
 - Activity logging system for any user events
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/)
+- **Frontend**: [Next.js](https://nextjs.org/) with App Router
+- **Backend**: [NestJS](https://nestjs.com/) with JWT authentication
 - **Database**: [Postgres](https://www.postgresql.org/)
 - **ORM**: [Drizzle](https://orm.drizzle.team/)
 - **Payments**: [Stripe](https://stripe.com/)
 - **UI Library**: [shadcn/ui](https://ui.shadcn.com/)
+- **Monorepo**: pnpm workspaces
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/nextjs/saas-starter
-cd saas-starter
 pnpm install
 ```
 
 ## Running Locally
 
-[Install](https://docs.stripe.com/stripe-cli) and log in to your Stripe account:
-
-```bash
-stripe login
-```
+### Database Setup
 
 Use the included setup script to create your `.env` file:
 
@@ -58,17 +58,32 @@ This will create the following user and team:
 - User: `test@test.com`
 - Password: `admin123`
 
-You can also create new users through the `/sign-up` route.
+### Development Servers
 
-Finally, run the Next.js development server:
+Start both applications:
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app in action.
+Or start them individually:
 
-You can listen for Stripe webhooks locally through their CLI to handle subscription change events:
+```bash
+pnpm dev:web  # Frontend on http://localhost:3000
+pnpm dev:api  # API on http://localhost:3001
+```
+
+The API documentation will be available at http://localhost:3001/api
+
+### Stripe Setup (Optional)
+
+[Install](https://docs.stripe.com/stripe-cli) and log in to your Stripe account:
+
+```bash
+stripe login
+```
+
+Listen for Stripe webhooks locally:
 
 ```bash
 stripe listen --forward-to localhost:3000/api/stripe/webhook

@@ -1,32 +1,52 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp
 .pnp.js
 .yarn/install-state.gz
+pnpm-lock.yaml
 
 # testing
-/coverage
+coverage/
+*.lcov
 
-# next.js
-/.next/
-/out/
+# next.js (web app)
+.next/
+out/
 
-# production
-/build
+# nestjs (api)
+dist/
+
+# production builds
+build/
+
+# logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
 
 # misc
 .DS_Store
 *.pem
+*.tgz
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
+# environment files
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
@@ -34,8 +54,31 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-.vscode
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # Docker
 postgres_data/
-.env*.local
+docker-compose.override.yml
+
+# OS generated files
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Database
+/db/data/
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
